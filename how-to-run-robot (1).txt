@@ -1,0 +1,36 @@
+ssh komodo@192.168.0.100
+export ROS_IP="192.168.0.100"
+
+roslaunch robotican_komodo komodo.launch lidar:=true front_camera:=true robot_localization:=true asus_camera:=true
+
+on my computer:
+	ros-robot-ip
+	rqt
+	rosrun ass2 move.py
+
+
+in bashrc
+
+
+# Setup ROS Lunar environment
+ros-env() {
+  export LD_LIBRARY_PATH="/usr/oldlib:${LD_LIBRARY_PATH}"
+    source /opt/ros/indigo/setup.bash
+      source $HOME/catkin_ws/devel/setup.bash
+        source /usr/share/gazebo/setup.sh
+          alias catkin_make="catkin_make -DPYTHON_EXECUTABLE=/usr/bin/python2"
+	    export PS1="[ROS-${ROS_DISTRO}]${PS1}"
+}
+ros-robot-ip(){
+	source /opt/ros/indigo/setup.bash
+    source $HOME/catkin_ws/devel/setup.bash
+    source /usr/share/gazebo/setup.sh
+	export ROS_MASTER_URI="http://192.168.0.100:11311"
+	echo $ROS_MASTER_URI
+	export ROS_IP="192.168.0.102"  #my computer ip. ifconfig
+	echo $ROS_IP
+	export PS1="[ROS-ROBOT]${PS1}"
+
+}
+
+#robot-ip is 192.168.0.100
